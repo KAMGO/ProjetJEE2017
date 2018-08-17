@@ -1,0 +1,4 @@
+function init() {
+	hide("supprimerComm");
+	hide("modifierComm");
+}

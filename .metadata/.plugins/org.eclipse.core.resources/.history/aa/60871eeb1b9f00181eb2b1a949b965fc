@@ -1,0 +1,180 @@
+package dao;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import oracle.jdbc.OracleTypes;
+import pojo.Article;
+import pojo.SousCategorie;
+import pojo.Utilisateur;
+import procedureStocke.ProcedureStocke;
+
+public class ArticleDAO extends DAO<Article> {
+
+	public ArticleDAO(Connection conn) { super(conn); }
+
+	@Override
+	public void create(Article article) {
+		CallableStatement cst = null;
+		try {
+			cst = connect.prepareCall(ProcedureStocke.INSERTARTICLE);
+			cst.setInt		(1, article.getSousCategorie().getID());
+			cst.setString	(2, article.getTitre());
+			cst.setInt		(3, article.getEtat());
+			cst.setDate		(4, (Date) article.getDateArticle());
+			cst.setInt		(5, article.getUtilisateur().getIdUtilisateur());
+			
+			cst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (cst != null) {
+				try {
+					cst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void delete(Article article) {
+		CallableStatement cst = null;
+		try {
+			cst = connect.prepareCall(ProcedureStocke.DELETEARTICLE);
+			cst.setString	(1, article.getTitre());	
+			cst.setDate		(2, article.getDateArticle());
+			cst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (cst != null) {
+				try {
+					cst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void update(Article article) {
+		
+		CallableStatement cst = null;
+		try {
+			//Appel de la procédure stockée pour modifier un sujet
+			cst = connect.prepareCall(ProcedureStocke.UPDATEARTICLE);
+
+			cst.setInt		(1, article.getID());
+			cst.setInt		(2, article.getSousCategorie().getID());
+			cst.setString	(3, article.getTitre());
+			cst.setInt     	(4, article.getEtat());
+			cst.setDate		(5, (Date)article.getDateArticle());
+			cst.setInt		(6, article.getUtilisateur().getIdUtilisateur());
+			
+			cst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (cst != null) {
+				try {
+					cst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public Article find(int id) {
+		CallableStatement 		cst 				= null;
+		Article	 	 	 	article		 	= null;
+		DAO<Utilisateur> 	utilisateurDAO		= new DAOFactory().getUtilisateurDAO();
+		DAO<SousCategorie> 	sousCategorieDAO 	= new DAOFactory().getSousCategorieDAO();
+		
+		try {
+			cst = connect.prepareCall(ProcedureStocke.SELECTARTICLE);
+			cst.setInt(1, id);
+			
+			//Je récupère les paramètres sortants de la procédures stockées
+			cst.registerOutParameter(2, java.sql.Types.NUMERIC);
+			cst.registerOutParameter(3, java.sql.Types.NUMERIC);
+			cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+			cst.registerOutParameter(5, java.sql.Types.NUMERIC);
+			cst.registerOutParameter(6, java.sql.Types.DATE);
+			cst.registerOutParameter(7, java.sql.Types.NUMERIC);
+	
+			cst.executeUpdate();
+			article = new Article(
+					id, 
+					sousCategorieDAO.find	(cst.getInt(3)),
+					cst.getString			(4), 
+					cst.getInt			(5), 
+					cst.getDate				(6), 
+					utilisateurDAO.find		(cst.getInt(7))
+			);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (cst != null) {
+				try {
+					cst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return article;
+	}
+
+	@Override
+	public ArrayList<Article> getList() {
+		Article 					article			= null;
+		CallableStatement 			cst 				= null;
+		ResultSet 					rs 					= null;
+		ArrayList<Article> 		listArticle 			= new ArrayList<Article>();
+		DAO<Utilisateur> 	 	utilisateurDAO 		= new DAOFactory().getUtilisateurDAO();
+		DAO<SousCategorie> 		sousCategorieDAO 	= new DAOFactory().getSousCategorieDAO();
+		try {
+			cst = connect.prepareCall(ProcedureStocke.GETLISTARTICLE);
+
+			cst.registerOutParameter(1, OracleTypes.CURSOR);
+			cst.executeUpdate();
+
+			// On récupère le curseur et on le cast à ResultSet
+			rs = (ResultSet) cst.getObject(1);
+
+			while (rs.next()) {
+				article = new Article(
+								rs.getInt				("idArticle"),
+								sousCategorieDAO.find	(rs.getInt("idSousCategorie")),
+								rs.getString			("titre"),
+								rs.getInt				("etat"),
+								rs.getDate				("dateArticle"),
+								utilisateurDAO.find		(rs.getInt("idUser"))
+							);
+				listArticle.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (cst != null) {
+				try {
+					cst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return listArticle;
+	}
+}
+

@@ -1,0 +1,76 @@
+2018-01-05 15:25:06,776 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-01-05 15:31:53,574 [Worker-10] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: serviceWeb:serviceWeb:0.0.1-SNAPSHOT @ C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\pom.xml.
+2018-01-05 15:32:02,438 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:02,444 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:02,463 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:02,467 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:02,560 [Worker-10] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /serviceWeb/src
+2018-01-05 15:32:02,563 [Worker-10] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /serviceWeb/src/test/java because it overlaps with /serviceWeb/src
+2018-01-05 15:32:03,899 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:03,908 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:03,914 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:03,917 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:05,314 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:05,317 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:05,321 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:05,323 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:06,894 [Worker-10] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2018-01-05 15:32:08,222 [Worker-10] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: serviceWeb:serviceWeb:0.0.1-SNAPSHOT @ C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\pom.xml.
+2018-01-05 15:32:10,968 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:10,970 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:10,979 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:10,981 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:10,983 [Worker-11] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of serviceWeb
+2018-01-05 15:32:10,985 [Worker-11] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for serviceWeb
+2018-01-05 15:32:11,004 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.maven.plugins:maven-clean-plugin:jar:2.5 is missing, no dependency information available
+2018-01-05 15:32:11,049 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:11,162 [Worker-10] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /serviceWeb/src
+2018-01-05 15:32:11,166 [Worker-10] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /serviceWeb/src/test/java because it overlaps with /serviceWeb/src
+2018-01-05 15:32:12,877 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:12,879 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:12,885 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:12,891 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:14,857 [Worker-10] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for serviceWeb
+2018-01-05 15:32:15,339 [Worker-10] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 8 sec
+2018-01-05 15:32:15,644 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:15,646 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:15,653 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:15,656 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:15,664 [Worker-24] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of serviceWeb
+2018-01-05 15:32:15,666 [Worker-24] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for serviceWeb
+2018-01-05 15:32:15,689 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:47,672 [Worker-24] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: serviceWeb:serviceWeb:0.0.1-SNAPSHOT @ C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\pom.xml.
+2018-01-05 15:32:50,198 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:50,201 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:32:50,206 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:32:50,209 [Worker-24] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:32:50,210 [Worker-24] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of serviceWeb
+2018-01-05 15:32:50,211 [Worker-24] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for serviceWeb
+2018-01-05 15:32:50,223 [Worker-24] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:34:03,987 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:34:03,990 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:34:03,993 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:34:03,996 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:35:06,113 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:35:06,115 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:35:06,118 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:35:06,122 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-05 15:35:32,526 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:35:32,529 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-05 15:35:32,532 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 15:35:32,535 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-06 10:17:46,975 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-01-06 10:18:29,044 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-06 10:18:29,068 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-06 10:18:29,074 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-06 10:18:29,077 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-01-12 20:47:45,732 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-01-12 20:48:15,263 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-12 20:48:15,270 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-01-12 20:48:15,279 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-12 20:48:15,282 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources
+2018-04-04 11:48:42,443 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-04-04 11:49:04,132 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-04-04 11:49:04,142 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\main\resources
+2018-04-04 11:49:04,149 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-04-04 11:49:04,152 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\asus\ProjetJEE2017_2bis\serviceWeb\src\test\resources

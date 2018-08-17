@@ -1,0 +1,56 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import dao.DAOFactory;
+import serviceWeb.ServiceWeb;
+import pojo.Article;
+public class ArticleModele {
+	
+	public ArrayList<Article> getList(){
+		return new DAOFactory().getArticleDAO().getList();
+	}
+	public boolean  ajouterArticle(Article article) {
+		String reponse = ServiceWeb.getService()
+		   		.path("article/ajout")
+		   		.queryParam("idSousCategorie",article.getSousCategorie().getID()+"")
+		   		.queryParam("titre",article.getTitre())
+		   		.queryParam("etat",article.getEtat()+"")
+		   		.queryParam("dateArticle",article.getDateArticle().toString())
+		   		.queryParam("idUtilisateur",article.getUtilisateur().getIdUtilisateur()+"")
+				.post(String.class);
+		return reponse.compareTo("ok")==0;
+	}
+	public boolean  modifierArticle(Article article) {
+		String reponse = ServiceWeb.getService()
+		   		.path("article/modifier")
+		   		.queryParam("id",article.getID()+"")
+		   		.queryParam("idSousCategorie",article.getSousCategorie().getID()+"")
+		   		.queryParam("titre",article.getTitre())
+		   		.queryParam("etat",article.getEtat()+"")
+		   		.queryParam("dateArticle",article.getDateArticle().toString())
+		   		.queryParam("idUtilisateur",article.getUtilisateur().getIdUtilisateur()+"")
+				.put(String.class);
+		return reponse.compareTo("ok")==0;
+	}
+	public boolean  supprimerArticle(Article article) {
+		String reponse = ServiceWeb.getService()
+		   		.path("article/supprimer")
+		   		.queryParam("titre",article.getTitre())
+		   		.queryParam("dateArticle",article.getDateArticle().toString())
+				.delete(String.class);
+		return reponse.compareTo("ok")==0;
+	}
+	public ArrayList<Article> getListArticlesSousCategorie( String maSousCategorie){
+		ArrayList<Article> listArticle = this.getList();
+		for(Article article : listArticle) {
+			System.out.println("je suis dans le if de article model "+article.getSousCategorie().getTitre()+"  taille  "+listArticle.size());
+			if(article.getSousCategorie().getTitre().compareTo(maSousCategorie)==0) {
+				listArticle.add(article);
+				System.out.println("je suis dans le if de article model "+article.getSousCategorie().getTitre());
+				}
+		}
+		return  listArticle;
+	}
+}

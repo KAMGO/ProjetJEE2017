@@ -1,0 +1,130 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ include file="menu.jsp" %>
+	<div class="jumbotron" id="subject">
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- col-lg-12 -->
+				<div class="col-lg-12">
+					<!-- wrapper wrapper-content animated fadeInRight -->
+					<div class="wrapper wrapper-content animated fadeInRight">
+						<!-- ibox-content m-b-sm border-bottom -->
+						<div class="ibox-content m-b-sm border-bottom">
+							<div class="p-xs">
+								<div class="pull-left m-r-md">
+									<i class="fa fa-globe text-navy mid-icon"></i>
+								</div>
+								<h2 id="nom-sous-categorie"></h2>
+								<span>Choisissez l'article que vous souhaitez consulter.</span>
+							</div>
+						</div>
+
+						<div class="ibox-content forum-container">
+							<div class="forum-title" id="total-sub-categorie">
+								<div class="pull-right forum-desc">
+									<!--  count du nombre de sujet dans cette sous cat -->
+									<small>Total posts: ${listeArticles.size()}</small>
+
+									<!-- Seul une personne connectée peut ajouter un sujet -->
+									<c:if test="${not empty utilisateur}">
+										<a id="add-Article" class=" launch-modal" href="#"
+											data-modal-id="modal-article">Nouveau <i
+											class="fa fa-plus-square-o fa-2x"></i>
+										</a>
+									</c:if>
+								</div>
+							</div>
+
+							<c:forEach items="${listeArticles}" var="article">
+								<div class="don-item active" id="elem-article">
+									<div class="row">
+										<div class="col-md-9">
+											<div class="don-icon">
+												<input type="hidden" id="sous-categorie-hidden"
+													value="${article.getSousCategorie().getTitre()}"> 
+											</div>
+											<!-- titre de article avec un href -->
+											<a
+												href="${context}/afficheCommentaire?nomArticle=${article.getTitre()}&nomSousCategorie=${article.getSousCategorie().getTitre()}&pseudoDonateur=${article.getUtilisateur().getPseudo()}&dateArticle=${article.getDateArticle()}"
+												id="titre-article" class="don-item-title"
+												title="${article.getTitre()}">${article.getTitre()}</a>
+
+											<div id="description-sujet" class="don-sub-title">Si
+												cet Article t'intéresse, cliquez dessus!.</div>
+										</div>
+										<div id="description-donateur-article">
+											<div class="col-md-1 don-info">
+												<span class="views-number">    .    </span>
+												<div>
+													<small>   .   </small>
+												</div>
+											</div>
+											<div class="col-md-1 don-info">
+												<span class="views-number">${article.getDateArticle()}</span>
+											</div>
+											<div class="col-md-1 don-info">
+												<span class="views-number">${article.getUtilisateur().getPseudo()}</span>
+												<div>
+													<small>donateur</small>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+					<!-- wrapper wrapper-content animated fadeInRight -->
+				</div>
+				<!-- col-lg-12 -->
+			</div>
+			<!-- row -->
+		</div>
+	</div>
+	<fieldset>
+			<div class="modal fade" id="modal-subject" tabindex="-1" role="dialog"
+			aria-labelledby="modal-subject-label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
+						</button>
+						<h3 class="modal-title" id="modal-subject-label">Ajouter un
+							Article</h3>
+						<p>Veuillez entrer le titre de l'article à ajouter:</p>
+					</div>
+	
+					<div class="modal-body">
+						<form role="form" action="${context}/ajouterArticle" method="POST"
+							class="subject-form">
+							<div class="form-group">
+								<input type="hidden" name="form-hidden-souscat"
+									id="form-hidden-souscat"></input> <label class="sr-only"
+									for="form-comment" id="form-souscat"></label>
+								<textarea name="form-subject-title" placeholder="Votre titre..."
+									class="form-subject form-control" id="form-subject-title"
+									rows="1"></textarea>
+								<textarea name="form-subject-comment"
+									placeholder="Votre commentaire..."
+									class="form-subject form-control" id="form-subject-comment"></textarea>
+							</div>
+							<button type="submit" class="btn1">Confirmer</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+<%@ include file="Footer.jsp" %>
+</body>
+</html>

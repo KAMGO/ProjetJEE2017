@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class="jumbotron" id="commentaire">
+		<div class="container">
+			<c:forEach items="${listeCommentaire}" var="commentaire">
+				<section class="container" id="elem-commentaire">
+					<section class="row clearfix">
+						<section class="col-md-12 column">
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<section class="panel-title">
+												<time class="pull-right">
+													<i class="fa fa-calendar"></i>
+													<div id="date-creation-sujet">
+														${commentaire.getArticle().getDateArticle()}</div>
+												</time>
+												<section class="pull-left" id="id">
+													<abbr title="id of the commentaire">${commentaire.getID()}</abbr>
+												</section>
+											</section>
+										</div>
+										<section class="row panel-body">
+											<section class="col-md-9">
+												<h2 id="nom-Article">${commentaire.getArticle().getTitre()}</h2>
+												<hr>
+												${commentaire.getTexte()}
+											</section>
+											<section id="user-description" class="col-md-3 ">
+												<section class="well">
+													<div class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+															class="fa fa-circle"></i>${commentaire.getUtilisateur().getPseudo()}<span
+															class="caret"></span></a>
+													</div>
+													<dl class="dl-horizontal">
+														<dt>Type:</dt>
+														<dd>${commentaire.getUtilisateur().getStatut()}</dd>
+													</dl>
+												</section>
+											</section>
+										</section>
+										<div class="panel-footer" id="panelfooter">
+											<div class="row">
+												<section class="col-md-2 "></section>
+												<section class="col-md-6">
+													<small><a href="#" data-toggle="tooltip" title="">
+													</a> </small> <br>
+												</section>
+
+												<!-- La personne connectée ne pourra modifier que ses publications -->
+												<!-- Si c'est un admin il peut tout modifier et supprimer -->
+												<c:choose>
+													<c:when
+														test="${commentaire.getUtilisateur().getPseudo() == utilisateur.getPseudo() || utilisateur.getStatut() == 'Admin'}">
+														<section>
+															<a href="#" class="btn btn-primary launch-modal"
+																id="edit" href="#"
+																data-modal-id="modal-modify-${commentaire.getID()}">
+																Modifier <i class="fa fa-edit"></i>
+															</a> <a href="#" class="btn btn-primary launch-modal"
+																id="delete" href="#"
+																data-modal-id="modal-delete-${commentaire.getID()}">
+																Supprimer <i class="fa fa-trash-o"></i>
+															</a>
+														</section>
+													</c:when>
+												</c:choose>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</section>
+				</section>
+	<!-- MODAL MODIFY COMMENTAIRE -->
+				<div class="modal fade" id="modal-modify-${commentaire.getID()}"
+					tabindex="-1" role="dialog" aria-labelledby="modal-modify-label"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
+								</button>
+								<h3 class="modal-title" id="modal-modify-label">Modifier un
+									commentaire</h3>
+								<p>Veuillez entrer le commentaire que vous voulez modifier:</p>
+							</div>
+
+							<div class="modal-body">
+								<form role="form" action="${context}/modifycomment"
+									method="POST" class="modify-form">
+									<input type="hidden" name="id-commentaire-hidden"
+										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
+									<div class="form-group">
+										<label class="sr-only" for="form-modify">Commentaire</label>
+										<textarea name="form-modify"
+											placeholder="Votre commentaire..."
+											class="form-modify form-control" id="form-modify">${commentaire.getTexte()}</textarea>
+									</div>
+									<button type="submit" class="btn1">Confirmer</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- MODAL DELETE COMMENTAIRE -->
+				<div class="modal fade" id="modal-delete-${commentaire.getID()}"
+					tabindex="-1" role="dialog" aria-labelledby="modal-modify-label"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
+								</button>
+								<h3 class="modal-title" id="modal-modify-label">Voulez-vous
+									supprimer ce commentaire?</h3>
+							</div>
+
+							<div class="modal-body">
+								<form role="form" action="${context}/deletecomment"
+									method="POST" class="modify-form">
+									<input type="hidden" name="id-commentaire-hidden"
+										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
+									<div class="form-group">
+										<label class="sr-only" for="form-modify">Commentaire</label>
+										<textarea name="form-modify" class="form-modify form-control"
+											id="form-modify" readonly>${commentaire.getTexte()}</textarea>
+									</div>
+									<button type="submit" class="btn1">Supprimer</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</c:forEach>
+
+</body>
+</html>
