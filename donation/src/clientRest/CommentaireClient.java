@@ -20,14 +20,14 @@ public class CommentaireClient {
 		   		.path("commentaire/modifier")
 		   		.queryParam("id",21+"")
 		   		.queryParam("texte","est t il deja user ? ")
-		   		.queryParam("dateCommentaire","10/10/2017")
+		   		.queryParam("dateCommentaire","18/10/2017")
 				.put(String.class);
 		  System.out.println(reponse);*/
 		  
 		/* String reponse = ServiceWeb.getService()
 			   		.path("commentaire/supprimer")
-			   		.queryParam("texte","enfant de 5 ans")
-			   		.queryParam("dateCommentaire","17/08/2018")
+			   		.queryParam("texte","or ?")
+			   		.queryParam("dateCommentaire","18/08/2018")
 					.delete(String.class);
 			  System.out.println(reponse);*/
 		  

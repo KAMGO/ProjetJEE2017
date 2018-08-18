@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/VUE/js/script.js"></script>
 </head>
 <body>
-
+<c:set var="context" value="${pageContext.request.contextPath}" /> 
 <div class="jumbotron" id="commentaire">
 			<c:forEach items="${listeCommentaire}" var="commentaire">
 				<div class="container" id="elem-commentaire">
@@ -148,14 +148,14 @@
 				</div>
 					<form role="form" action="${context}/ajouterCommentaire" method="POST">
 						<div class="form-group">
-							<label class="sr-only" for="form-comment">Commentaire</label> <label
-								class="form-comment form-control" id="nom-sujet-label">nom</label>
-							<label class="form-comment form-control" id="date-sujet-label">date</label>
-
-							<input type="hidden" name="nom-sujet-hidden"
-								id="nom-sujet-hidden" value="xxx"></input> <input type="hidden"
-								name="date-sujet-hidden" id="date-sujet-hidden" value="xxx"></input>
-							<textarea name="form-comment" placeholder="Votre commentaire..."
+							<label class="sr-only" for="form-comment">Commentaire</label>
+							<input type="hidden" name="date-article-hidden"
+								id="date-article-hidden" value="${dateArticle}"></input> 
+							<input type="hidden" name="nom-article-hidden"
+								id="nom-article-hidden" value="${nomArticle}"></input> 
+							<input type="hidden"
+								name="nomSouscategorie-hidden" id="nomSouscategorie-hidden" value="${nomSousCategorie}"></input>
+							<textarea name="form-commentaire" placeholder="Votre commentaire..."
 								class="form-comment form-control" id="form-comment"></textarea>
 						</div>
 						<button type="submit" class="btn1">Confirmer</button>

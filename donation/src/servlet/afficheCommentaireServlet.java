@@ -53,7 +53,6 @@ public class afficheCommentaireServlet extends HttpServlet {
 		// Ensuite on parse cette date en date.sql
 		java.util.Date parsedDate = formatter.parse(nouveauFormatStringUtil);
         java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-        System.out.println("je suis dans servlet afficle Commentaire"+dateArticle+"article : "+nomArticle + " "+nomSousCategorie);
         // On récupère la liste de commentaire filtré
         ArrayList<Commentaire> listCommentaire =  commentaireM.getListCommentaire(nomArticle, nomSousCategorie, sqlDate);
 
@@ -66,6 +65,9 @@ public class afficheCommentaireServlet extends HttpServlet {
 			response.setContentType("text/html");
 		} else {
 			request.setAttribute("listeCommentaire", listCommentaire);
+			request.setAttribute("nomSousCategorie", nomSousCategorie);
+			request.setAttribute("dateArticle", dateArticle);
+			request.setAttribute("nomArticle", nomArticle);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/AfficheListCommentaire.jsp");
 			dispatcher.forward(request, response);
 			response.setContentType("text/html");
