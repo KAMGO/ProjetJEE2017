@@ -53,7 +53,7 @@ public class afficheCommentaireServlet extends HttpServlet {
 		// Ensuite on parse cette date en date.sql
 		java.util.Date parsedDate = formatter.parse(nouveauFormatStringUtil);
         java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-        // On récupère la liste de commentaire filtré
+        // On récupère la liste de commentaire
         ArrayList<Commentaire> listCommentaire =  commentaireM.getListCommentaire(nomArticle, nomSousCategorie, sqlDate);
 			request.setAttribute("listeCommentaire", listCommentaire);
 			request.setAttribute("nomSousCategorie", nomSousCategorie);

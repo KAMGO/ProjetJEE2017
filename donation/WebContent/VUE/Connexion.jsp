@@ -18,12 +18,10 @@
 	
 	         <label for="pseudo"> Pseudo <span class="requis">*</span></label>
 	         <input type="text" id="pseudo" name="pseudo" value="${param.pseudo}" size="20" maxlength="60" />
-	         <span class="erreur">${erreurs['peudo']}</span>
 	         <br />
 	
 	         <label for="motdepasse">Mot de passe <span class="requis">*</span></label>
 	         <input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />
-	         <span class="erreur">${erreurs['motdepasse']}</span>
 	         <br />
 	
 	         <input type="submit" value="Connexion" class="btn btn-default" />
@@ -31,22 +29,7 @@
 	     </fieldset>
 	</form>
 		<br>
-	  <p><c:out value="${ error }"></c:out></p>
 </div>
 <%@ include file="Footer.jsp" %>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')
-	</script>
-	<script src="/ProjetJEE2017_2bis-donation/VUE/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/ProjetJEE2017_2bis-donation/VUE/assets/js/jquery.backstretch.min.js"></script>
-	<script src="/ProjetJEE2017_2bis-donation/VUE/js/scripts.js"></script>
 </body>
 </html>

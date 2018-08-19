@@ -26,7 +26,7 @@ public class CommentaireClient {
 		  
 		/* String reponse = ServiceWeb.getService()
 			   		.path("commentaire/supprimer")
-			   		.queryParam("texte","or ?")
+			   		.queryParam("texte","or ou diamant?")
 			   		.queryParam("dateCommentaire","18/08/2018")
 					.delete(String.class);
 			  System.out.println(reponse);*/

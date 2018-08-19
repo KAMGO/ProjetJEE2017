@@ -11,7 +11,7 @@ public class UtilisateurModele {
 	
 	public ArrayList<Utilisateur> getList(){
 		return new DAOFactory().getUtilisateurDAO().getList();}
-	
+
 	public boolean ajouterUtilisateur(Utilisateur utilisateur) {	
 		 String reponse = ServiceWeb.getService()
 			   		.path("utilisateur/ajout")

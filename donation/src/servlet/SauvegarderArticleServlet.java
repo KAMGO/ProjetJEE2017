@@ -44,7 +44,7 @@ public class SauvegarderArticleServlet extends HttpServlet {
 		if(article!=null) {
 			article.setEtat(0);
 			if(!articleM.modifierArticle(article)) {
-				request.setAttribute("info_message", "contacter le donateur<h2>  "+article.getUtilisateur().getPrenom()+ " </h2>  Via son addresse mail :<h2> "+article.getUtilisateur().getMail()+" </h2> afin d'entre en possesion de l article");
+				request.setAttribute("info_message", "contacter le donateur  "+article.getUtilisateur().getPrenom()+ "   Via son addresse mail :  "+article.getUtilisateur().getMail()+"   afin d'entre en possesion de l article");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 				dispatcher.forward(request, response);
 				response.setContentType("text/html");

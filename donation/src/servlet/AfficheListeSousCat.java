@@ -39,12 +39,21 @@ public class AfficheListeSousCat extends HttpServlet {
 		String nomCategorie = request.getParameter("nomCategorie");
 		SousCategorieModele categorie = new SousCategorieModele();
 		ArrayList<SousCategorie> listSousCategorie = categorie.getList(nomCategorie);
-		
 		if (listSousCategorie.isEmpty()){
-			request.setAttribute("error_message", "Element vide ou non trouvé.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
-			dispatcher.forward(request, response);
-			response.setContentType("text/html");
+			if(utilisateur.getStatut().equals("Admin")) {
+				request.setAttribute("listSousCategorie", listSousCategorie);
+				request.setAttribute("nomCategorie", nomCategorie);
+				request.setAttribute("statut", utilisateur.getStatut());
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/AfficheListSousCat.jsp");
+		        dispatcher.forward(request, response); 
+				response.setContentType("text/html");
+			}
+			else {
+				request.setAttribute("error_message", "Element vide ou non trouvé.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
+				dispatcher.forward(request, response);
+				response.setContentType("text/html");
+			}
 		} else {
 			request.setAttribute("listSousCategorie", listSousCategorie);
 			request.setAttribute("nomCategorie", nomCategorie);

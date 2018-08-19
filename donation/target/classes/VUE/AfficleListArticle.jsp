@@ -14,22 +14,19 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- col-lg-12 -->
 				<div class="col-lg-12">
-					<!-- wrapper wrapper-content animated fadeInRight -->
-					<div class="wrapper wrapper-content animated fadeInRight">
-						<!-- ibox-content m-b-sm border-bottom -->
-						<div class="ibox-content m-b-sm border-bottom">
+					<div class="wrapper">
+						<div class="ibox">
 							<div class="p-xs">
 								<h2 id="nom-sous-categorie"></h2>
 								<span>Choisissez l'article que vous souhaitez consulter.</span>
 							</div>
 						</div>
 
-						<div class="ibox-content article-container">
+						<div class="ibox">
 							<div class="article-title" id="total-sub-categorie">
 								<div class="pull-right article-desc">
-									<!--  count du nombre de sujet dans cette sous cat -->
+									<!--  count du nombre de d'article dans cette sous cat -->
 									<small>Total posts: ${listeArticles.size()}</small>
 								</div>
 							</div>
@@ -67,9 +64,7 @@
 							</c:forEach>
 						</div>
 					</div>
-					<!-- wrapper wrapper-content animated fadeInRight -->
 				</div>
-				<!-- col-lg-12 -->
 			</div>
 			<!-- row -->
 		</div>

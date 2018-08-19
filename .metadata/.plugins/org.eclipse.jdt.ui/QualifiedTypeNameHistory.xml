@@ -24,8 +24,6 @@
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="serviceWeb.ServiceWeb"/>
 <fullyQualifiedTypeName name="dao.DAOFactory"/>
-<fullyQualifiedTypeName name="model.CategorieModele"/>
-<fullyQualifiedTypeName name="pojo.Categorie"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.text.ParseException"/>
 <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
@@ -35,8 +33,6 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
 <fullyQualifiedTypeName name="java.time.LocalDate"/>
-<fullyQualifiedTypeName name="model.CommentaireModele"/>
-<fullyQualifiedTypeName name="model.SousCategorieModele"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="pojo.SousCategorie"/>
 <fullyQualifiedTypeName name="pojo.Utilisateur"/>
@@ -45,6 +41,10 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="pojo.Article"/>
+<fullyQualifiedTypeName name="model.CommentaireModele"/>
 <fullyQualifiedTypeName name="pojo.Commentaire"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="model.CategorieModele"/>
+<fullyQualifiedTypeName name="pojo.Categorie"/>
+<fullyQualifiedTypeName name="model.SousCategorieModele"/>
 </qualifiedTypeNameHistroy>

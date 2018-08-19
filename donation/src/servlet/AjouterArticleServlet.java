@@ -65,12 +65,13 @@ public class AjouterArticleServlet extends HttpServlet {
 					article1=articleModele.getArticleComplet(cat, titreArticle, utilisateur);
 					if(article1!=null){
 						
-						// On récupère le sujet créé car on en a besoin pour le commentaire
+						// On récupère le article créé car on en a besoin pour le commentaire
 						// On crée le premier commentaire
 						Commentaire comm = new Commentaire(article1, textComm, utilisateur);
+						System.out.println(comm.getTexte());
 						System.out.println("bravo  titre article  "+article1.getTitre()); 
 						comModele.ajouterComm(comm);
-						String completeURL = request.getContextPath() + "/afficheCommentaire" 
+						String completeURL = request.getContextPath() + "/afficheCommentaireServlet" 
 								+ "?&nomArticle=" + titreArticle
 								+ "&nomSousCategorie=" + souscategorie
 								+ "&pseudoAuteur="+ utilisateur.getPseudo() 

@@ -1,0 +1,87 @@
+package model;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.stream.Collectors;
+
+import org.json.JSONObject;
+
+import dao.DAOFactory;
+import pojo.Commentaire;
+import serviceWeb.ServiceWeb;
+
+public class CommentaireModele {
+	
+	
+	public ArrayList<Commentaire> getList(){
+		return new DAOFactory().getCommentaireDAO().getList();
+	}
+	public boolean ajouterComm(Commentaire comm) {
+		System.out.println(" je suis dans model commentaire :  "+comm.getTexte()); 
+		 String reponse = ServiceWeb.getService()
+			   		.path("commentaire/ajout")
+			   		.queryParam("idArticle",comm.getArticle().getID()+"")
+			   		.queryParam("idUtilisateur",comm.getUtilisateur().getIdUtilisateur()+"")
+			   		.queryParam("texte",comm.getTexte())
+					.post(String.class);
+		 
+		 return reponse.equals("OK");
+	}
+	public static Commentaire getCommentaire(int id){
+		return new DAOFactory().getCommentaireDAO().find(id);
+	}
+	public boolean supprimerComm(Commentaire comm) {
+		 String reponse = ServiceWeb.getService()
+			   		.path("commentaire/supprimer")
+			   		.queryParam("texte",comm.getTexte())
+			   		//.queryParam("dateCommentaire",comm.getDateCommentaire().toString())
+					.delete(String.class);
+		return reponse.equals("OK");
+	}
+	
+	public boolean modifier(int id,String texte) {
+		String reponse = ServiceWeb.getService()
+		   		.path("commentaire/modifier")
+		   		.queryParam("id",id+"")
+		   		.queryParam("texte",texte)
+				.put(String.class);
+		return reponse.equals("OK");	
+	}
+	public ArrayList<Commentaire> getListCommentaire(String nomArticle, String nomSousCategorie, Date dateArticle) {
+		ArrayList<Commentaire> listCommentaire = new ArrayList<Commentaire>();
+		for(Commentaire comm :this.getList()) {
+			if(comm.getArticle().getTitre().equals(nomArticle)
+						&& comm.getArticle().getSousCategorie().getTitre().equals(nomSousCategorie)
+						&& comm.getArticle().getDateArticle().equals(dateArticle))
+				listCommentaire.add(comm);
+		}
+		/*ArrayList<Commentaire> listCommentaire = this.getList()
+				.stream()
+				.filter(x -> x.getArticle().getTitre().equals(nomArticle)
+						&& x.getArticle().getSousCategorie().getTitre().equals(nomSousCategorie)
+						&& x.getArticle().getDateArticle().equals(dateArticle))
+				.collect(Collectors.toCollection(ArrayList::new));*/	
+		return listCommentaire;
+	}
+	public void getComm(){
+		String reponse = ServiceWeb.getService()
+		   		.path("commentaire/listCommentaire")
+				.get(String.class);
+		//JSONObject jsonObject = new JSONObject(reponse);
+		//JSONArray array = new JSONArray(reponse);
+		StringBuffer buffer = new StringBuffer(reponse);
+		buffer.setCharAt(0, '{');
+		buffer.setCharAt(buffer.length()-1, '}');
+		/* for (Iterator iterator = jsonObject.keys(); iterator.hasNext();) {
+			Commentaire o =(Commentaire) iterator.next();
+			System.out.println(o.texte);	 
+		 }*/
+		reponse=buffer.toString();
+		JSONObject jsonObject = new JSONObject(reponse);
+		for (Iterator iterator = jsonObject.keys(); iterator.hasNext();) {
+			Commentaire o =(Commentaire) iterator.next();
+			//System.out.println(o.texte);	 
+		 }
+	}
+}

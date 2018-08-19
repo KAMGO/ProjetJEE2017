@@ -49,12 +49,23 @@ public class CommentaireModele {
 		return reponse.equals("OK");	
 	}
 	public ArrayList<Commentaire> getListCommentaire(String nomArticle, String nomSousCategorie, Date dateArticle) {
-		ArrayList<Commentaire> listCommentaire = this.getList()
+		ArrayList<Commentaire> listCommentaire = new ArrayList<Commentaire>();
+		for(Commentaire comm :this.getList()) {
+			if(comm.getArticle().getTitre()==null ||comm.getArticle().getSousCategorie().getTitre()==null || comm.getArticle().getDateArticle()==null )
+			{}else {
+			System.out.println("bravo  titre article  je suis dans Commentaire  "+comm.getArticle().getTitre() + " id " +comm.getArticle().getID() +" " + comm.getTexte() ); 
+			if(comm.getArticle().getTitre().equals(nomArticle)
+						&& comm.getArticle().getSousCategorie().getTitre().equals(nomSousCategorie)
+						&& comm.getArticle().getDateArticle().equals(dateArticle))
+				listCommentaire.add(comm);
+			}
+		}
+		/*ArrayList<Commentaire> listCommentaire = this.getList()
 				.stream()
-				.filter(x -> x.getArticle().getTitre().equals(nomArticle) 
+				.filter(x -> x.getArticle().getTitre().equals(nomArticle)
 						&& x.getArticle().getSousCategorie().getTitre().equals(nomSousCategorie)
 						&& x.getArticle().getDateArticle().equals(dateArticle))
-				.collect(Collectors.toCollection(ArrayList::new));	
+				.collect(Collectors.toCollection(ArrayList::new));*/	
 		return listCommentaire;
 	}
 	public void getComm(){

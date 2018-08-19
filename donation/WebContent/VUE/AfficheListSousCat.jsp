@@ -55,7 +55,7 @@
 	</div>
 	<c:if test="${statut=='Admin'}">
 	<fieldset>
-		<legend>Ajouter une Sous Categorie </legend>
+		<legend><h3>Ajouter une Sous Categorie </h3></legend>
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -69,6 +69,29 @@
 									id="form-hidden-cat" value="${nomCategorie}">
 								<textarea name="form-SousCategorie" placeholder="Votre titre..."
 									 id="form-SousCategorie"
+									></textarea>
+							</div>
+							<button type="submit" class="btn1">Confirmer</button>
+						</form>
+					</div>
+				</div>
+			</div>
+	</fieldset>
+		<fieldset>
+		<legend><h3> Suprimer un utilisateur </h3> </legend>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p>Veuillez saisir le Pseudo de l'utitisateur à supprimer:</p>
+					</div>
+	
+					<div class="modal-body">
+						<form method="POST" action="${context}/supprimerUtilisateur">
+							<div class="form-group">
+								<input type="hidden" name="form-hidden-cat1"
+									id="form-hidden-cat1" value="${nomCategorie}">
+								<textarea name="form-pseudo" placeholder=" pseudo utilisateur..."
+									 id="form-pseudo"
 									></textarea>
 							</div>
 							<button type="submit" class="btn1">Confirmer</button>
