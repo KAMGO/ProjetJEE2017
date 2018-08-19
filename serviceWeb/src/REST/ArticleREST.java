@@ -51,8 +51,8 @@ public class ArticleREST {
 	@PUT
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("modifier")
-	public Response updateArticle(@QueryParam("id") int id,@QueryParam("idSousCategorie") int idSousCategorie, @QueryParam("titre") String titre,@QueryParam("etat")int etat,
-			@QueryParam("dateArticle") String dateArticle, @QueryParam("idUtilisateur") int idUtilisateur)throws Exception, ParseException{
+	public Response updateArticle(@QueryParam("id") int id,@QueryParam("idSousCategorie") int idSousCategorie, @QueryParam("titre") String titre,@QueryParam("etat")int etat, @QueryParam("idUtilisateur") int idUtilisateur)throws Exception, ParseException{
+		String dateArticle =  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		CallableStatement cst = con.prepareCall("{CALL UPDATEARTICLE(?,?,?,?,?,?)}");
 		cst.setInt		(1, id);
 		cst.setInt		(2, idSousCategorie);

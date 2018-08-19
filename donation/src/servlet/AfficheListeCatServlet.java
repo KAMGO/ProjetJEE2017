@@ -37,7 +37,7 @@ public class AfficheListeCatServlet extends HttpServlet {
 		
 		if (listCategorie.isEmpty()){
 			request.setAttribute("error_message", "aucune categorie .");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 			dispatcher.forward(request, response);
 			response.setContentType("text/html");
 		} else {

@@ -13,86 +13,50 @@
 <c:set var="context" value="${pageContext.request.contextPath}" /> 
 <div class="jumbotron" id="commentaire">
 			<c:forEach items="${listeCommentaire}" var="commentaire">
-				<div class="container" id="elem-commentaire">
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<div class="row clearfix">
-								<div class="col-md-12 column">
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<div class="panel-title">
-												<time class="pull-right">
 													<i class="fa fa-calendar"></i>
 													<div id="date-creati">
 														${commentaire.getArticle().getDateArticle()}
 													</div>
-												</time>
 												<div class="pull-left" id="id">
-													<abbr title="id of the commentaire">${commentaire.getID()}</abbr>
+													<p title="id of the commentaire">${commentaire.getID()}</p>
 												</div>
 											</div>
 										</div>
 										<div class="row panel-body">
 											<div class="col-md-9">
 												<h2 id="nom-Article">${commentaire.getArticle().getTitre()}</h2>
-												<hr>
 												${commentaire.getTexte()}
 											</div>
-											<div id="user-description" class="col-md-3 ">
+											<div id="user-description">
 												<div class="well">
 													<div class="dropdown">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-															class="fa fa-circle"></i>${commentaire.getUtilisateur().getPseudo()}<span
-															class="caret"></span></a>
+                                                    <p>  ${commentaire.getUtilisateur().getPseudo()}</p>
 													</div>
-													<p>
-														<dt>Statut :</dt>
-														<dd>${commentaire.getUtilisateur().getStatut()}</dd>
-													</p>
+													<p>statut:  ${commentaire.getUtilisateur().getStatut()}</p>
 												</div>
-											</div>
-										</div>
-										<div class="panel-footer" id="panelfooter">
-											<div class="row">
-
-												<!-- La personne connectée ne pourra modifier que ses publications -->
-												<!-- Si c'est un admin il peut tout modifier et supprimer -->
-												<c:choose>
-													<c:when
-														test="${commentaire.getUtilisateur().getPseudo() == utilisateur.getPseudo() || utilisateur.getStatut() == 'Admin'}">
-														<div>
-															<button type="button" id="afficheModif" valeur="Modifier">Modifier</button>  
-										                  
-															<button type="button" id="afficheSuppr" valeur="supprimer">supprimer</button>
-														</div>
-													</c:when>
-												</c:choose>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	<!-- MODAL MODIFY COMMENTAIRE -->
-													<!-- celui qui a publier peut modifier ou suprimer son commentaire -->
-												<!-- l'administrateur peut tout modifier et supprimer -->
+							
+	                                        <!-- modifier COMMENTAIRE -->
+								<!-- celui qui a publier peut modifier ou suprimer son commentaire -->
+								<!-- l'administrateur peut tout modifier et supprimer -->
 		<c:if test="${commentaire.getUtilisateur().getPseudo() == utilisateur.getPseudo() || utilisateur.getStatut() == 'Admin' }">
 				<div class="modal fade" id="modifierComm">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" >
-									<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
-								</button>
 								<h3 class="modal-title" id="modif_commentaite">Modifier un
 									commentaire</h3>
 								<p>Veuillez entrer le commentaire que vous voulez modifier:</p>
 							</div>
 
 							<div class="modal-body">
-								<form action="${context}/modifycomment"
+								<form action="${context}/modifierCommentaire"
 									method="POST" class="modify-form">
 									<input type="hidden" name="id-commentaire-hidden"
 										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
@@ -109,20 +73,17 @@
 					</div>
 				</div>
 
-				<!-- MODAL DELETE COMMENTAIRE -->
+				<!-- SUPPRIMER COMMENTAIRE -->
 				<div class="modal fade" id="supprimerComm">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">
-									<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
-								</button>
 								<h3 class="modal-title" id="modal-modify-label">Voulez-vous
 									supprimer ce commentaire?</h3>
 							</div>
 
 							<div class="modal-body">
-								<form role="form" action="${context}/deletecomment"
+								<form action="${context}/supprimerCommentaire"
 									method="POST" class="modify-form">
 									<input type="hidden" name="id-commentaire-hidden"
 										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
@@ -161,6 +122,12 @@
 						<button type="submit" class="btn1">Confirmer</button>
 					</form>
 				</div>
+</fieldset>
+<fieldset>
+<legend><a
+	href="${context}/sauvegarderArticle?nomArticle=${nomArticle}&nomSousCategorie=${nomSousCategorie}"
+	class="don-item-title" id="sauvegarder">sauvegarder : ${nomArticle}</a>
+</legend>
 </fieldset>
 </body>
 </html>

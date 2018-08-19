@@ -1,9 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,28 +38,37 @@ public class inscriptionServlet extends HttpServlet {
 		String mail 		= request.getParameter("form-email");
 		UtilisateurModele utilisateurM = new UtilisateurModele();
 		Utilisateur utilisateur1 = new Utilisateur(pseudo.toString(),motdepasse.toString(), nom.toString(), prenom.toString(),mail.toString(),"user"); 
-
-		if(utilisateurM.inscription(utilisateur1)) {
-			HttpSession session = request.getSession();
-			// si pas de session, destruction et création d’une nouvelle
-			if (!session.isNew()) {
-				session.invalidate();
-				session = request.getSession();
+		if(pseudo.equals("")||motdepasse.equals("")||nom.equals("")||prenom.equals("")||mail.equals("")) {
+			request.setAttribute("error_message", "certain champs sont vide.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
+			dispatcher.forward(request, response);
+			response.setContentType("text/html");	
+		}
+		else {
+			if(utilisateurM.inscription(utilisateur1)) {
+				HttpSession session = request.getSession();
+				// si pas de session, destruction et création d’une nouvelle
+				if (!session.isNew()) {
+					session.invalidate();
+					session = request.getSession();
+				}
+				
+				Utilisateur utilisateurC;
+				utilisateurC= utilisateurM.getUtilisateur(pseudo);
+				
+				
+				session.setAttribute("utilisateur", utilisateurC);
+			    RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/Accueil.jsp");
+			    dispatcher.forward(request, response); 
+				response.setContentType("text/html"); 
+			} else{
+				request.setAttribute("error_message", "Le pseudo saisi existe déjà.");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
+				dispatcher.forward(request, response);
+				response.setContentType("text/html");
 			}
 			
-			Utilisateur utilisateurC;
-			utilisateurC= utilisateurM.getUtilisateur(pseudo);
-			
-			
-			session.setAttribute("utilisateur", utilisateurC);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/Accueil.jsp");
-		    dispatcher.forward(request, response); 
-			response.setContentType("text/html"); 
-		} else{
-			request.setAttribute("error_message", "Le pseudo saisi existe déjà.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
-			dispatcher.forward(request, response);
-			response.setContentType("text/html");
+		
 		}
 	}
 

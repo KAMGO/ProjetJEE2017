@@ -46,8 +46,8 @@ public class CommentaireREST {
 	@PUT
 	@Path("modifier")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response updateCommentaire(@QueryParam("id") int id, @QueryParam("texte") String texte,
-			@QueryParam("dateCommentaire") String dateCommentaire)throws SQLException, ParseException{
+	public Response updateCommentaire(@QueryParam("id") int id, @QueryParam("texte") String texte)throws SQLException, ParseException{
+		String dateCommentaire=  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));	
 		CallableStatement cst = con.prepareCall("{CALL UPDATECOMMENTAIRE(?,?,?)}");
 		cst.setString	(1, texte);
 		cst.setString	(2, dateCommentaire);
@@ -59,8 +59,9 @@ public class CommentaireREST {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("supprimer")
-	public Response DeleteCommentaire( @QueryParam("texte") String texte,@QueryParam("dateCommentaire") String dateCommentaire) throws SQLException, ParseException{
+	public Response DeleteCommentaire( @QueryParam("texte") String texte) throws SQLException, ParseException{
 		CallableStatement cst = con.prepareCall("{CALL DELETECOMMENTAIRE(?,?)}");
+		String dateCommentaire=  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));	
 		cst.setString	(1, texte);
 		cst.setString	(2, dateCommentaire);
 		cst.execute();

@@ -40,15 +40,6 @@ public class AfficleArticles extends HttpServlet {
 		ArrayList<Article> listeArticles = articleM.getListArticlesSousCategorie(maSousCategorie);
 		//ArrayList<Article> listeArticles = articleM.getList();
 		System.out.println(maSousCategorie+"taille de la liste : "+ listeArticles.size());
-		if (listeArticles.isEmpty()){
-			// Si c'est vide on ajoute un faux article pour juste afficher le bouton "ajouter article"
-			Article articleVide = new Article();
-			SousCategorie sousCategorie = new SousCategorie();
-			sousCategorie.setTitre(maSousCategorie);
-			articleVide.setSousCategorie(sousCategorie);
-			
-			listeArticles.add(articleVide);
-		} 
 		
 		request.setAttribute("listeArticles", listeArticles);
 		request.setAttribute("maSousCategorie", maSousCategorie);

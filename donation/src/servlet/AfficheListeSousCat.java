@@ -9,7 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import pojo.SousCategorie;
+import pojo.Utilisateur;
 import model.SousCategorieModele;
 
 /**
@@ -31,17 +34,21 @@ public class AfficheListeSousCat extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur 	= (Utilisateur) session.getAttribute("utilisateur");
 		String nomCategorie = request.getParameter("nomCategorie");
 		SousCategorieModele categorie = new SousCategorieModele();
 		ArrayList<SousCategorie> listSousCategorie = categorie.getList(nomCategorie);
 		
 		if (listSousCategorie.isEmpty()){
 			request.setAttribute("error_message", "Element vide ou non trouvé.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 			dispatcher.forward(request, response);
 			response.setContentType("text/html");
 		} else {
 			request.setAttribute("listSousCategorie", listSousCategorie);
+			request.setAttribute("nomCategorie", nomCategorie);
+			request.setAttribute("statut", utilisateur.getStatut());
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/AfficheListSousCat.jsp");
 	        dispatcher.forward(request, response); 
 			response.setContentType("text/html");

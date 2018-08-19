@@ -39,4 +39,13 @@ public class CategorieModele {
 				.delete(String.class);
 		return reponse.compareTo("OK")==0;
 	}
+	public Categorie getCategorie(String nomCat) {
+		Categorie cat1=null;
+		for(Categorie cat : this.getList()) {
+			System.out.println("nom Categ  "+cat.getTitre()+"  "+ nomCat);
+			if(cat.getTitre().equals(nomCat))
+				cat1=cat;
+		}
+		return cat1;
+	}
 }

@@ -13,11 +13,11 @@ public class SousCategorieModele {
 	public ArrayList<SousCategorie> getList(){
 		return new DAOFactory().getSousCategorieDAO().getList();
 	}
-	public boolean ajouterSousCat(SousCategorie sousCat) {
+	public boolean ajouterSousCat(int idCat,String titre) {
 		 String reponse = ServiceWeb.getService()
 			   		.path("sousCategorie/ajout")
-			   		.queryParam("idCategorie",sousCat.getCategorie().getID()+"")
-			   		.queryParam("titre",sousCat.getTitre())
+			   		.queryParam("idCategorie",idCat+"")
+			   		.queryParam("titre",titre)
 					.post(String.class);
 		return reponse.compareTo("ok")==0;
 	}

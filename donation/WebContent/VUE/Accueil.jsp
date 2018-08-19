@@ -5,14 +5,19 @@
 <html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/VUE/bootstrap.css" type="text/css">
 <title>Accueil</title>
 </head>
 <body>
 <%@ include file="menu.jsp" %>
 <div class="container">
-	<h1>Donation</h1>
-	<p>Ce site permet au industrie au personne de mettre a disposition des neccesiteurs les produits qui ne sert plus  </p>
+	<h1>Bienvenu(e) sur notre site de donation !</h1>
+	<p>Ce site permet aux industries et aux personnes de mettre à disposition des neccesiteurs les produits qui ne leurs servent plus ou des erreurs de production
+	  </p>
+</div>
+<div id="welcome">
+	<img class="img-responsive img-rounded"
+	src="https://images.wallpaperscraft.com/image/woman_child_sleep_peace_background_54090_1680x1050.jpg"
+	alt="img welcome">
 </div>
 <%@ include file="Footer.jsp" %>
 </body>

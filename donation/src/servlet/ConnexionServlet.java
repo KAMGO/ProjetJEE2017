@@ -40,14 +40,14 @@ public class ConnexionServlet extends HttpServlet {
 			
 			if (pseudo.equals("") || motdepasse.equals("")) {
 				request.setAttribute("error_message", "Vous n'avez pas rempli les champs nécéssaires.");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 				dispatcher.forward(request, response);
 				response.setContentType("text/html");
 			}
 
 			if (utilisateur == null) {
 				request.setAttribute("error_message", "Authentification incorrecte, mauvaise saisie des informations.");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 				dispatcher.forward(request, response);
 				response.setContentType("text/html");
 			} else {

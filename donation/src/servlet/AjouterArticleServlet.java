@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,8 +46,8 @@ public class AjouterArticleServlet extends HttpServlet {
 			System.out.println("pres session debut");
 			// récupération du commentaire dans la requête
 			String souscategorie 	= request.getParameter("form-hidden-souscat");
-			String titreArticle		= request.getParameter("form-subject-title");
-			String textComm 		= request.getParameter("form-subject-comment");
+			String titreArticle		= request.getParameter("form-Article-title");
+			String textComm 		= request.getParameter("form-Article-comment");
 			System.out.println(" apres recuration param : "+ souscategorie+"     "+titreArticle+"   "+ textComm);
 			if (!session.isNew()) {
 				if (!textComm.equals("") && !titreArticle.equals("")) {
@@ -68,12 +70,12 @@ public class AjouterArticleServlet extends HttpServlet {
 						Commentaire comm = new Commentaire(article1, textComm, utilisateur);
 						System.out.println("bravo  titre article  "+article1.getTitre()); 
 						comModele.ajouterComm(comm);
-						/*String completeURL = request.getContextPath() + "/displaycomments" 
-								+ "?&nomSujet=" + titreSujet
+						String completeURL = request.getContextPath() + "/afficheCommentaire" 
+								+ "?&nomArticle=" + titreArticle
 								+ "&nomSousCategorie=" + souscategorie
 								+ "&pseudoAuteur="+ utilisateur.getPseudo() 
-								+ "&dateSujet=" + sqlDate;
-						response.sendRedirect(completeURL);*/
+								+ "&dateArticle=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+						response.sendRedirect(completeURL);
 						System.out.println("bravo effectuer");
 					}
 					else {

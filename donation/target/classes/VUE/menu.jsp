@@ -1,12 +1,13 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar ">
     <div class="container">
+    	<c:set var="context" value="${pageContext.request.contextPath}"/>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-            	<li><a href="/donation/VUE/Accueil">Accueil</a></li> 
+            	<li><a href="${context}/accueil">Accueil</a></li> 
             	<c:if test="${!empty sessionScope.utilisateur}">
             		<!-- grâce à cet import, je récupère les listes pour afficher la navbar -->
 				<c:import url="/affichercategories" />
-				<c:set var="context" value="${pageContext.request.contextPath}"/>
+			
 				<ul class="nav navbar-nav">
 				<c:forEach items="${listCategorie}" var="categorie">
 					<li><a
@@ -22,7 +23,7 @@
                	<li><a href="/donation/VUE/inscription.jsp"><span class="glyphicon glyphicon-user"></span>Inscription</a></li>
     	        </c:if>
     	        <c:if test="${!empty sessionScope.utilisateur}">
-	           	<li><a href="/donation/VUE/Deconnexion"><span class="glyphicon glyphicon-log-out"></span>Deconnexion</a></li>
+	           	<li><a href="${context}/deconnexion"><span class="glyphicon glyphicon-log-out"></span>Deconnexion</a></li>
 	           	</c:if>
             </ul>
             

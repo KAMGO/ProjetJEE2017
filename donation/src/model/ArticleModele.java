@@ -48,7 +48,7 @@ public class ArticleModele {
 		ArrayList<Article> listArticle = this.getList();
 		ArrayList<Article> listArticle1 =new  ArrayList<Article>();
 		for(Article article : listArticle) {
-			if(article.getSousCategorie().getTitre().compareTo(maSousCategorie)==0) {
+			if(article.getSousCategorie().getTitre().compareTo(maSousCategorie)==0&&article.getEtat()==1) {
 				listArticle1.add(article);
 				}
 		}
@@ -59,10 +59,24 @@ public class ArticleModele {
 		 Article  article = null;
 		 for(Article article1 : this.getList()) {
 			 if(article1.getSousCategorie().getTitre().equals(souscat.getTitre()) 
-						&& article1.getTitre().equals(titre))
+						&& article1.getTitre().equals(titre)&&article1.getUtilisateur().getPseudo().equals(user.getPseudo()))
 					article=article1;
 			 System.out.println("je suis dans get articlecomplet"+ article1.getTitre()+"  "+titre+"  "+user.getPrenom());
 		 }
+
+			 return article;
+	}
+	public Article getArticleComplet1(SousCategorie souscat,String titre) {
+		 Article  article = null;
+		 int i = 0;
+		 for(Article article1 : this.getList()) {
+			 if(article1.getSousCategorie().getTitre().equals(souscat.getTitre()) 
+						&& article1.getTitre().equals(titre))
+			 {	article=article1;i++;}
+			 System.out.println("je suis dans get articlecomplet"+ article1.getTitre()+"  "+titre+"  "); 
+		 }
+		 if(i!=1)
+			 article=null;
 
 			 return article;
 	}

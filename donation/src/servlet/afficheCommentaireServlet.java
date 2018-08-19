@@ -55,15 +55,6 @@ public class afficheCommentaireServlet extends HttpServlet {
         java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
         // On récupère la liste de commentaire filtré
         ArrayList<Commentaire> listCommentaire =  commentaireM.getListCommentaire(nomArticle, nomSousCategorie, sqlDate);
-
-		int nbrCommentaire = listCommentaire.size();
-
-		if (listCommentaire.isEmpty() || nbrCommentaire == 0) {
-			request.setAttribute("error_message", "Il n'y a pas de commentaire pour cet Article.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
-			dispatcher.forward(request, response);
-			response.setContentType("text/html");
-		} else {
 			request.setAttribute("listeCommentaire", listCommentaire);
 			request.setAttribute("nomSousCategorie", nomSousCategorie);
 			request.setAttribute("dateArticle", dateArticle);
@@ -71,7 +62,7 @@ public class afficheCommentaireServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/AfficheListCommentaire.jsp");
 			dispatcher.forward(request, response);
 			response.setContentType("text/html");
-		}
+		//}
 	} catch (ParseException e) {
 		e.printStackTrace();
 	}

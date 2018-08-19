@@ -1,0 +1,154 @@
+package REST;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import model.Article;
+import oracle.jdbc.OracleTypes;
+import singleton.Connexion;
+
+@Path("article")
+public class ArticleREST {
+	/*Creation de la connexion DB*/
+	Connection con = Connexion.getInstance();
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("ajout")
+	public Response ajoutArticle(@QueryParam("idSousCategorie") int idSousCategorie, @QueryParam("titre") String titre,@QueryParam("etat")int etat, @QueryParam("idUtilisateur") int idUtilisateur)throws SQLException, ParseException{
+		String dateArticle =  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		CallableStatement cst =con.prepareCall("{CALL INSERTARTICLE(?,?,?,?,?)}");
+			cst.setInt		(1, idSousCategorie);
+			cst.setString	(2, titre);
+			cst.setInt		(3, etat);
+			cst.setString	(4, dateArticle);
+			cst.setInt		(5, idUtilisateur);
+			cst.executeQuery();
+			cst.close();
+			return Response.status(Status.OK).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("modifier")
+	public Response updateArticle(@QueryParam("id") int id,@QueryParam("idSousCategorie") int idSousCategorie, @QueryParam("titre") String titre,@QueryParam("etat")int etat,
+			@QueryParam("dateArticle") String dateArticle, @QueryParam("idUtilisateur") int idUtilisateur)throws Exception, ParseException{
+		CallableStatement cst = con.prepareCall("{CALL UPDATEARTICLE(?,?,?,?,?,?)}");
+		cst.setInt		(1, id);
+		cst.setInt		(2, idSousCategorie);
+		cst.setString	(3, titre);
+		cst.setInt     	(4, etat);
+		cst.setString	(5,dateArticle);
+		cst.setInt		(6, idUtilisateur);
+		cst.execute();
+		cst.close();
+		return Response.status(Status.OK).build();
+	}
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("supprimer")
+	public Response DeleteArticle( @QueryParam("titre") String titre,@QueryParam("dateArticle") String dateArticle) throws SQLException, ParseException{
+		CallableStatement cst = con.prepareCall("{CALL DELETEARTICLE(?,?)}");
+		cst.setString	(1, titre);	
+		cst.setString	(2, dateArticle);
+		cst.execute();
+		cst.close();
+		return Response.status(Status.OK).build();
+	}
+	@GET
+	@Path("find")
+	@Produces(MediaType.TEXT_XML)
+	public Response findArticle(@QueryParam("id") int id) throws Exception{
+		Article article = null;
+		CallableStatement cst = con.prepareCall("{CALL SELECTARTICLE(?,?,?,?,?,?,?)}");
+		cst.setInt(1, id);
+		//Je récupère les paramètres sortants de la procédures stockées
+		cst.registerOutParameter(2, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(3, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+		cst.registerOutParameter(5, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(6, java.sql.Types.DATE);
+		cst.registerOutParameter(7, java.sql.Types.NUMERIC);
+		cst.executeUpdate();
+		article = new Article(
+				id, 
+				SousCategorieREST.findSousCategorie1(cst.getInt(3)),
+				cst.getString(4), 
+				cst.getInt(5), 
+				cst.getDate	(6), 
+				UtilisateurREST.findUtilisateur1(cst.getInt(7))
+		);
+		return Response.status(Status.OK).entity(article).build();
+	}
+	@GET
+	@Path("listArticle")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listArticle() throws Exception{
+		Article article = null;
+		ResultSet rs = null;
+		ArrayList<Article> listArticle	= new ArrayList<Article>();
+		CallableStatement cst = con.prepareCall("{CALL GETLISTARTICLE(?)}");
+		cst.registerOutParameter(1, OracleTypes.CURSOR);
+		cst.execute();
+		// On récupère le curseur et on le cast à ResultSet
+		rs = (ResultSet) cst.getObject(1);
+		while (rs.next()) {
+			article = new Article(
+							rs.getInt				("idArticle"),
+							SousCategorieREST.findSousCategorie1(rs.getInt("idSousCategorie")),
+							rs.getString			("titre"),
+							rs.getInt				("etat"),
+							rs.getDate				("dateArticle"),
+							UtilisateurREST.findUtilisateur1(rs.getInt("idUser"))
+						);
+			listArticle.add(article);
+		}
+		
+		return Response.status(Status.OK).entity(listArticle).build();
+	}
+	public static Article findArticle1( int id) throws Exception{
+		Connection con = Connexion.getInstance();
+		Article article = null;
+		CallableStatement cst = con.prepareCall("{CALL SELECTARTICLE(?,?,?,?,?,?,?)}");
+		cst.setInt(1, id);
+		//Je récupère les paramètres sortants de la procédures stockées
+		cst.registerOutParameter(2, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(3, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+		cst.registerOutParameter(5, java.sql.Types.NUMERIC);
+		cst.registerOutParameter(6, java.sql.Types.DATE);
+		cst.registerOutParameter(7, java.sql.Types.NUMERIC);
+		cst.execute();
+		article = new Article(
+				id, 
+				SousCategorieREST.findSousCategorie1(cst.getInt(3)),
+				cst.getString(4), 
+				cst.getInt(5), 
+				cst.getDate	(6), 
+				UtilisateurREST.findUtilisateur1(cst.getInt(7))
+		);
+		return article;
+	}
+	
+}

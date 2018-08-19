@@ -51,33 +51,18 @@ public class AjouterCommentaireServlet extends HttpServlet {
 			System.out.println(" apres les get "+ textComm+"  "+dateArticle+ "  "+ souscategorie); 
 			ArticleModele articleM = new ArticleModele();
 			CommentaireModele comModele = new CommentaireModele();
-			// Il faut changer le format de la date reçue en param car celui-ci
-			// est incorrect
-			// 1992-12-17
-			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			//java.util.Date d = sdf.parse(request.getParameter("date-article-hidden"));
-			// 17/12/92
-			//sdf.applyPattern("dd/MM/yy");
-			//String nouveauFormatStringUtil = sdf.format(d);
-
-			// Ensuite on parse cette date en date.sql
-			//SimpleDateFormat formatter 	= new SimpleDateFormat("dd/MM/yy");
-			//java.util.Date parsedDate = formatter.parse(dateArticle);
-			//java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-			//utilisateur
 			Utilisateur utilisateur 	= (Utilisateur) session.getAttribute("utilisateur");
 			SousCategorieModele sousCatM       = new SousCategorieModele();
 			SousCategorie cat = sousCatM.getSousCat(souscategorie);
 			System.out.println(" apres  apres"+utilisateur.getNom() +" sous "+cat.getCategorie().getTitre()+ nomArticle); 
 			//on recuperer l article 
-			Article article = articleM.getArticleComplet(cat, nomArticle, utilisateur);
+			Article article = articleM.getArticleComplet1(cat, nomArticle);
 			System.out.println("bravo  titre article  "+article.getTitre()); 
 			if (!session.isNew()) {
 				if (!textComm.equals("")) {
 					Commentaire comm = new Commentaire(article, textComm, utilisateur);
 					comModele.ajouterComm(comm);
 					System.out.println("bravo  comm ajouter "+textComm); 
-					//http://localhost:9090/ProjetJEE-Forum/displaycomments?nomSujet=Marseille%20nul&nomSousCategorie=Football&pseudoAuteur=Adista&dateSujet=2016-12-15
 					String completeURL = request.getContextPath() + "/afficheCommentaireServlet" + 
 							"?&nomArticle=" + article.getTitre() +
 							"&nomSousCategorie=" + article.getSousCategorie().getTitre() +
@@ -87,13 +72,13 @@ public class AjouterCommentaireServlet extends HttpServlet {
 					response.sendRedirect(completeURL);
 				} else {
 					request.setAttribute("error_message", "Le commentaire est vide.");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 					dispatcher.forward(request, response);
 					response.setContentType("text/html");
 				}
 			} else {
 				request.setAttribute("error_message", "Connectez-vous.");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/erreur.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
 				dispatcher.forward(request, response);
 				response.setContentType("text/html");
 			}

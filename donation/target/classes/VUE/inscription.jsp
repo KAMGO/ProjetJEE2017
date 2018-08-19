@@ -14,15 +14,12 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Quitter</span>
-					</button>
 					<h3 class="modal-title" id="modal-register-label">Enregistrez-vous
 						maintenant</h3>
 					<p>Remplissez les champs suivants:</p>
 				</div>
 				<div class="modal-body">
-					<form role="form" action="${context}/inscription" method="post"
+					<form action="${context}/inscription" method="post"
 						class="registration-form">
 						<div class="form-group">
 							<label class="sr-only" for="form-username">Pseudo</label> <input

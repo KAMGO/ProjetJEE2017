@@ -1,0 +1,79 @@
+package servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.CommentaireModele;
+import pojo.Commentaire;
+
+/**
+ * Servlet implementation class SupprimerCommentaireServlet
+ */
+@WebServlet("/SupprimerCommentaireServlet")
+public class SupprimerCommentaireServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SupprimerCommentaireServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			// Récupère les données
+			String idCommentaire = request.getParameter("id-commentaire-hidden");
+			
+				// Instancie un commentaireModele
+				CommentaireModele commentaireModele = new CommentaireModele();
+			
+				// On récupère les données AVANT LA SUPPRESSION pour redidriger
+				Commentaire com = CommentaireModele.getCommentaire(Integer.parseInt(idCommentaire));
+				String nomSouscat=com.getArticle().getSousCategorie().getTitre();
+				String pseudo=com.getUtilisateur().getPseudo();
+				String dateArticle = com.getArticle().getDateArticle().toString();
+				System.out.println(" je suis a la fin de modele comm  "); 
+					// On ne supprime uniquement que le commentaire sélectionné
+					// Modifie le commentaire via le nouveau texte et l'id du commentaire
+				commentaireModele.modifier(com.getID(), com.getTexte());
+				commentaireModele.supprimerComm(com);
+					
+					// Construction de l'URL de retour
+					String completeURL = request.getContextPath() + "/afficheCommentaireServlet" + 
+							"?&nomArticle=" + com.getArticle().getTitre() +
+							"&nomSousCategorie=" + nomSouscat +
+							"&pseudoDonateur=" +pseudo+ 
+							"&dateArticle=" +  dateArticle;
+					// Redirige
+					response.sendRedirect(completeURL);
+				
+		} catch (Exception e) {
+			e.getStackTrace();
+			request.setAttribute("error_message", "Suppression non effectuée.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/VUE/error.jsp");
+			dispatcher.forward(request, response);
+			response.setContentType("text/html");
+		}
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

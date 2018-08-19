@@ -21,27 +21,16 @@
 						<!-- ibox-content m-b-sm border-bottom -->
 						<div class="ibox-content m-b-sm border-bottom">
 							<div class="p-xs">
-								<div class="pull-left m-r-md">
-									<i class="fa fa-globe text-navy mid-icon"></i>
-								</div>
 								<h2 id="nom-sous-categorie"></h2>
 								<span>Choisissez l'article que vous souhaitez consulter.</span>
 							</div>
 						</div>
 
-						<div class="ibox-content forum-container">
-							<div class="forum-title" id="total-sub-categorie">
-								<div class="pull-right forum-desc">
+						<div class="ibox-content article-container">
+							<div class="article-title" id="total-sub-categorie">
+								<div class="pull-right article-desc">
 									<!--  count du nombre de sujet dans cette sous cat -->
 									<small>Total posts: ${listeArticles.size()}</small>
-
-									<!-- Seul une personne connectée peut ajouter un sujet -->
-									<c:if test="${not empty utilisateur}">
-										<a id="add-Article" class=" launch-modal" href="#"
-											data-modal-id="modal-article">Nouveau <i
-											class="fa fa-plus-square-o fa-2x"></i>
-										</a>
-									</c:if>
 								</div>
 							</div>
 
@@ -59,16 +48,10 @@
 												id="titre-article" class="don-item-title"
 												title="${article.getTitre()}">${article.getTitre()}</a>
 
-											<div id="description-sujet" class="don-sub-title">Si
+											<div id="description-article" class="don-sub-title">Si
 												cet Article t'intéresse, cliquez dessus!.</div>
 										</div>
 										<div id="description-donateur-article">
-											<div class="col-md-1 don-info">
-												<span class="views-number">    .    </span>
-												<div>
-													<small>   .   </small>
-												</div>
-											</div>
 											<div class="col-md-1 don-info">
 												<span class="views-number">${article.getDateArticle()}</span>
 											</div>
@@ -93,8 +76,7 @@
 	</div>
 	<fieldset>
 	<legend>Ajouter un article</legend>
-			<div class="modal fade" id="modal-subject" tabindex="-1" role="dialog"
-			aria-labelledby="modal-subject-label" aria-hidden="true">
+			<div class="modal fade" id="modal-article" >
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -108,12 +90,11 @@
 									id="form-hidden-souscat" value="${maSousCategorie}">
 									 <label class="sr-only"
 									for="form-comment" id="form-souscat"></label>
-								<textarea name="form-subject-title" placeholder="Votre titre..."
-									class="form-subject form-control" id="form-subject-title"
+								<textarea name="form-Article-title" placeholder="Votre titre..."
+									class="form-Article form-control" id="form-subject-title"
 									rows="1"></textarea>
-								<textarea name="form-subject-comment"
-									placeholder="Votre commentaire..."
-									class="form-subject form-control" id="form-subject-comment"></textarea>
+								<textarea name="form-Article-comment"
+									placeholder="Votre commentaire..." id="form-Article-comment"></textarea>
 							</div>
 							<button type="submit" class="btn1">Confirmer</button>
 						</form>

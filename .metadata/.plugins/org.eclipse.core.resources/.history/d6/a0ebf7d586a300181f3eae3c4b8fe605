@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title> Liste commentaires</title>
+<script type="text/javascript" src="/VUE/js/common.js"></script>
+<script type="text/javascript" src="/VUE/js/script.js"></script>
+</head>
+<body>
+<c:set var="context" value="${pageContext.request.contextPath}" /> 
+<div class="jumbotron" id="commentaire">
+			<c:forEach items="${listeCommentaire}" var="commentaire">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<div class="panel-title">
+													<i class="fa fa-calendar"></i>
+													<div id="date-creati">
+														${commentaire.getArticle().getDateArticle()}
+													</div>
+												<div class="pull-left" id="id">
+													<p title="id of the commentaire">${commentaire.getID()}</p>
+												</div>
+											</div>
+										</div>
+										<div class="row panel-body">
+											<div class="col-md-9">
+												<h2 id="nom-Article">${commentaire.getArticle().getTitre()}</h2>
+												${commentaire.getTexte()}
+											</div>
+											<div id="user-description">
+												<div class="well">
+													<div class="dropdown">
+                                                    <p>  ${commentaire.getUtilisateur().getPseudo()</p>
+													</div>
+													<p> ${commentaire.getUtilisateur().getStatut()}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+	                                        <!-- modifier COMMENTAIRE -->
+								<!-- celui qui a publier peut modifier ou suprimer son commentaire -->
+								<!-- l'administrateur peut tout modifier et supprimer -->
+		<c:if test="${commentaire.getUtilisateur().getPseudo() == utilisateur.getPseudo() || utilisateur.getStatut() == 'Admin' }">
+				<div class="modal fade" id="modifierComm">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title" id="modif_commentaite">Modifier un
+									commentaire</h3>
+								<p>Veuillez entrer le commentaire que vous voulez modifier:</p>
+							</div>
+
+							<div class="modal-body">
+								<form action="${context}/modifierCommentaire"
+									method="POST" class="modify-form">
+									<input type="hidden" name="id-commentaire-hidden"
+										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
+									<div class="form-group">
+										<label class="sr-only" for="form-modify">Commentaire</label>
+										<textarea name="form-modify"
+											placeholder="Votre commentaire..."
+											class="form-modify form-control" id="form-modify">${commentaire.getTexte()}</textarea>
+									</div>
+									<button type="submit" class="btn1">Confirmer</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- SUPPRIMER COMMENTAIRE -->
+				<div class="modal fade" id="supprimerComm">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h3 class="modal-title" id="modal-modify-label">Voulez-vous
+									supprimer ce commentaire?</h3>
+							</div>
+
+							<div class="modal-body">
+								<form action="${context}/supprimerCommentaire"
+									method="POST" class="modify-form">
+									<input type="hidden" name="id-commentaire-hidden"
+										id="id-commentaire-hidden" value="${commentaire.getID()}"></input>
+									<div class="form-group">
+										<label class="sr-only" for="form-modify">Commentaire</label>
+										<textarea name="form-modify" class="form-modify form-control"
+											id="form-modify" readonly>${commentaire.getTexte()}</textarea>
+									</div>
+									<button type="submit" class="btn1">Supprimer</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+		</c:if>
+	</c:forEach>
+</div>
+<fieldset>
+<legend><h2>ajouter un commentaire </h2></legend>
+			<div class="modal-content">
+				<div class="modal-header">
+					<p>Veuillez entrer le commentaire que vous voulez ajouter:</p>
+				</div>
+					<form role="form" action="${context}/ajouterCommentaire" method="POST">
+						<div class="form-group">
+							<label class="sr-only" for="form-comment">Commentaire</label>
+							<input type="hidden" name="date-article-hidden"
+								id="date-article-hidden" value="${dateArticle}"></input> 
+							<input type="hidden" name="nom-article-hidden"
+								id="nom-article-hidden" value="${nomArticle}"></input> 
+							<input type="hidden"
+								name="nomSouscategorie-hidden" id="nomSouscategorie-hidden" value="${nomSousCategorie}"></input>
+							<textarea name="form-commentaire" placeholder="Votre commentaire..."
+								class="form-comment form-control" id="form-comment"></textarea>
+						</div>
+						<button type="submit" class="btn1">Confirmer</button>
+					</form>
+				</div>
+</fieldset>
+<fieldset>
+<legend><a
+	href="${context}/sauvegarderArticle?&nomArticle=${nomArticle}&nomSousCategorie=${nomSousCategorie}"
+	class="don-item-title" id="sauvegarder">sauvegarder : ${nomArticle}</a>
+</legend>
+</fieldset>
+</body>
+</html>
